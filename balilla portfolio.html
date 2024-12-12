@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="style.css">
+    <title>Balilla Portfolio</title>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="logo" data-aos="zoom-in" data-aos-duration="1500">
+                Danielle <span> A. <span>Balilla</span>
+            </div>
+            <div class="links">
+                <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="100"><a href="index.html" id="home-link">Home</a></div>
+                <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="300"><a href="skills.html" id="skills-link">Skills</a></div>
+                <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="400"><a href="projects.html" id="projects-link">Projects</a></div>
+                <div class="link" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="500"><a href="contact.html" id="contact-link">Contact</a></div>
+            </div>
+            <i class="fa-solid fa-bars hamburg" onclick="hamburg()"></i>
+        </div>
+    </nav>
+
+    <section id="home">
+        <div class="main-container">
+            <div class="image" data-aos="zoom-out" data-aos-duration="3000">
+                <img src="profile.jpg" alt="Profile Photo">
+            </div>
+            <div class="content">
+                <h1 data-aos="fade-left" data-aos-duration="1500" data-aos-delay="700">Meet <span>Danielle</span></h1>
+                <div class="typewriter" data-aos="fade-right" data-aos-duration="1500" data-aos-delay="900">CS 1104 <span class="typewriter-text"></span><label for="">|</label></div>
+                <p data-aos="flip-down" data-aos-duration="1500" data-aos-delay="1100" style="text-align: justify;">Danielle A. Balilla is currently pursuing a Bachelor's degree in Computer Science at Batangas State University TNEU Alangilan Campus. She aspires to become a Web Developer and is passionate about expanding her skills in this field. Although she is in the early stages of her study, Danielle is eager to learn, grow, and gain hands-on experience in web development. She is committed to building a strong foundation and continuously improving her technical knowledge to achieve her career goals.</p>
+                <div class="social-links">
+                    <a href="https://github.com/dbalilla" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="1300"><i class="fa-brands fa-github"></i></a>
+                    <a href="https://www.facebook.com/aeoellie/" data-aos="fade-up" data-aos-duration="1500" data-aos-delay="1400"><i class="fa-brands fa-facebook"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({offset:0});
+
+        const texts = [
+            "LEARNER",
+            "DREAMER",
+            "EXPLORER"
+        ];
+        let speed = 100;
+        const textElements = document.querySelector(".typewriter-text");
+        let textIndex = 0;
+        let characterIndex = 0;
+
+        function typeWriter() {
+            if (characterIndex < texts[textIndex].length) {
+                textElements.innerHTML += texts[textIndex].charAt(characterIndex);
+                characterIndex++;
+                setTimeout(typeWriter, speed);
+            } else {
+                setTimeout(eraseText, 1000);
+            }
+        }
+
+        function eraseText() {
+            if (textElements.innerHTML.length > 0) {
+                textElements.innerHTML = textElements.innerHTML.slice(0, -1);
+                setTimeout(eraseText, 50);
+            } else {
+                textIndex = (textIndex + 1) % texts.length;
+                characterIndex = 0;
+                setTimeout(typeWriter, 500);
+            }
+        }
+
+        function highlightCurrentPage() {
+            const path = window.location.pathname;
+            const links = document.querySelectorAll('.nav-container .links .link a');
+
+            links.forEach(link => {
+                link.style.color = '';
+            });
+
+            if (path.includes('index.html')) {
+                document.getElementById('home-link').querySelector('a').style.color = '#e44b8d';
+            } else if (path.includes('skills.html')) {
+                document.getElementById('skills-link').querySelector('a').style.color = '#e44b8d';
+            } else if (path.includes('contact.html')) {
+                document.getElementById('contact-link').querySelector('a').style.color = '#e44b8d';
+            }
+        }
+
+        window.onload = function() {
+            typeWriter();
+            highlightCurrentPage();
+        };
+    </script>
+</body>
+</html>
